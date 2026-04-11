@@ -43,7 +43,7 @@ If you want to build **AntherOS**, then follow these steps:
   openjdk-21-jdk
   EOF
   
-  wget -O wallpaper.zip https://github.com/antheros-technologies/AntherOS-Core/
+  wget -O wallpaper.zip https://github.com/antheros-technologies/AntherOS-Core/raw/refs/heads/main/wallpaper.zip
   sudo rm -rf /usr/share/backgrounds/cosmic/*
   sudo unzip wallpaper.zip /usr/share/backgrounds/cosmic/
   clear
