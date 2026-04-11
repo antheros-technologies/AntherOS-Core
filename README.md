@@ -2,7 +2,7 @@
 The flagship operating system from **AntherOS Technologies**.
 
 ## About
-AntherOS is a Ubuntu-based Linux distribution 
+AntherOS is a PopOS-based Linux distribution 
 designed for Speed and Gaming.
 
 ## Leadership
