@@ -1,0 +1,7 @@
+[
+    {
+        "id": "1ebfaf92-173e-49ca-8ee3-cff9e2795cff",
+        "name": "Notification",
+        "command": "notify-send \"From Mobile\"",
+    },
+]

@@ -1,0 +1,37 @@
+{
+    (
+        modifiers: [
+            Super,
+            Alt,
+        ],
+        key: "m",
+        description: Some("Projector Mirror"),
+    ): Spawn("cosmic-randr --output VGA-1 --same-as eDP-1"),
+    (
+        modifiers: [
+            Alt,
+        ],
+        key: "F4",
+    ): Disable,
+    (
+        modifiers: [
+            Alt,
+        ],
+        key: "k",
+        description: Some("Projector Off"),
+    ): Spawn("cosmic-randr --output VGA-1 --off"),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "q",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+            Alt,
+        ],
+        key: "e",
+        description: Some("Projector Extend"),
+    ): Spawn("cosmic-randr --output VGA-1 --auto --right-of eDP-1"),
+}

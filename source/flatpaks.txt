@@ -1,0 +1,10 @@
+com.heroicgameslauncher.hgl
+com.usebottles.bottles
+com.vysp3r.ProtonPlus
+dev.vencord.Vesktop
+io.github.antimicrox.antimicrox
+net.davidotek.pupgui2
+net.lutris.Lutris
+org.atheme.audacious
+org.openrgb.OpenRGB
+org.vinegarhq.Sober

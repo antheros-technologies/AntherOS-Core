@@ -1,0 +1,16 @@
+(
+    extremely_low: 0.29999995,
+    extremely_low_2: 0.27691996,
+    very_low: 0.25384998,
+    very_low_2: 0.23075998,
+    low: 0.20769,
+    low_2: 0.18460995,
+    medium: 0.16153997,
+    medium_2: 0.13845998,
+    high: 0.11537999,
+    high_2: 0.09230995,
+    very_high: 0.060229957,
+    very_high_2: 0.04614997,
+    extremely_high: 0.023079991,
+    extremely_high_2: 0.0,
+)

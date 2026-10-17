@@ -1,0 +1,11 @@
+(
+    rules: [
+        (
+            id: "global-transparency",
+            match: (
+                // Leaving this empty matches ALL windows
+            ),
+            opacity: 0.8,
+        ),
+    ],
+)
