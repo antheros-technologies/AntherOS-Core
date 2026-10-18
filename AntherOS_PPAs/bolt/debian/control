@@ -1,0 +1,11 @@
+Source: bolt
+Section: utils
+Priority: optional
+Maintainer: Anagh Barnwal <contact.anaghbarnwal@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+
+Package: bolt
+Architecture: all
+Depends: ${misc:Depends}, python3
+Description: Bolt is a TUI package manager, easy to use, for new linux users with a premium feel. Made for AntherOS, can be used with debian based linux distros and distros which uses apt and python.

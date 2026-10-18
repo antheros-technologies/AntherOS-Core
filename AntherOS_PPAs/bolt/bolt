@@ -1,0 +1,234 @@
+#!/usr/bin/env python3
+import sys
+import os
+import subprocess
+import glob
+from rich.console import Console
+from rich.table import Table
+from rich.panel import Panel
+
+console = Console()
+
+BRAND = "[bold cyan]⚡ BOLT[/bold cyan]"
+SUCCESS = "[bold green]✓[/bold green]"
+WARN = "[bold yellow]⚠[/bold yellow]"
+ERROR = "[bold red]✗[/bold red]"
+
+def show_detailed_help():
+    """The master user manual detailing Bolt's entire execution matrix."""
+    console.print(Panel(
+        f"{BRAND} [bold white]V4 SUPREME PRODUCTION ENGINE[/bold white]\n"
+        "The ultimate, distraction-free package companion for the Debian/Ubuntu ecosystem.",
+        border_style="cyan"
+    ))
+    
+    table = Table(show_header=True, header_style="bold magenta", box=None)
+    table.add_column("Command", style="cyan", width=25)
+    table.add_column("Description", style="white", width=50)
+    table.add_column("Example Usage", style="grey50")
+    
+    # Core Commands
+    table.add_row("refresh / update", "Quietly synchronizes global package mirrors.", "sudo bolt refresh")
+    table.add_row("install <package>", "Installs software without technical terminal spam.", "sudo bolt install vlc")
+    table.add_row("remove <package>", "Uninstalls apps and purges leftover configurations.", "sudo bolt remove gimp")
+    table.add_row("search <query>", "Finds applications inside an elegant list layout.", "bolt search steam")
+    table.add_row("upgrade", "Safely updates all system software.", "sudo bolt upgrade")
+    table.add_row("autoremove", "Sweeps away orphan dependencies and loose files.", "sudo bolt autoremove")
+    
+    # New Quality of Life Commands
+    table.add_row("clean", "Wipes residual cache logs and frees disk space.", "sudo bolt clean")
+    table.add_row("sync", "Runs an automated refresh and full upgrade sequentially.", "sudo bolt sync")
+    table.add_row("fix", "Clears broken locks and repairs corrupt packages.", "sudo bolt fix")
+    table.add_row("list-installed", "Displays user-installed packages in a clean table.", "bolt list-installed")
+    table.add_row("history", "Prints a log history of your package operations.", "bolt history")
+    table.add_row("purge-kernels", "Safely purges dead, hidden Linux kernels.", "sudo bolt purge-kernels")
+    table.add_row("add-ppa <ppa>", "Safely maps a new external PPA repository.", "sudo bolt add-ppa ppa:user/repo")
+    table.add_row("remove-ppa <ppa>", "Cleans a third-party PPA repository off your disk.", "sudo bolt remove-ppa ppa:user/repo")
+    table.add_row("show-held", "Lists all software locked at specific versions.", "bolt show-held")
+    table.add_row("hold <package>", "Locks a package from being updated or modified.", "sudo bolt hold docker-ce")
+    table.add_row("unhold <package>", "Unlocks a package to resume standard upgrades.", "sudo bolt unhold docker-ce")
+    table.add_row("stats", "Calculates space consumed by cache layers.", "bolt stats")
+    table.add_row("help", "Brings up this unified engine dashboard.", "bolt help")
+
+    console.print(table)
+
+def run_native_stream(args, custom_message=None):
+    if custom_message:
+        console.print(f"{BRAND} {custom_message}")
+    
+    optimized_args = ["apt-get"] + args
+    if "install" in args and "--no-install-recommends" not in args:
+        optimized_args.append("--no-install-recommends")
+    if "install" in args:
+        optimized_args.append("-y")
+
+    try:
+        process = subprocess.Popen(optimized_args, stdout=sys.stdout, stderr=sys.stderr, env=os.environ.copy())
+        process.wait()
+        return process.returncode
+    except KeyboardInterrupt:
+        console.print(f"\n{ERROR} [bold red]Operation canceled by user.[/bold red]")
+        sys.exit(130)
+
+def handle_search(query):
+    console.print(f"{BRAND} [yellow]Searching ecosystem mirrors for '[bold white]{query}[/bold white]'...[/yellow]\n")
+    try:
+        result = subprocess.run(["apt-cache", "search", query], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        lines = result.stdout.strip().split('\n')
+        if not lines or lines == ['']:
+            console.print(f"{WARN} No packages matched your search query.")
+            return
+
+        table = Table(box=None, header_style="bold magenta")
+        table.add_column("Package Name", style="bold cyan", width=35)
+        table.add_column("Description", style="white")
+
+        for line in lines[:25]:
+            if " - " in line:
+                pkg_name, desc = line.split(" - ", 1)
+                table.add_row(pkg_name.strip(), desc.strip())
+        
+        console.print(table)
+        if len(lines) > 25:
+            console.print(f"\n[grey50]... and {len(lines) - 25} more packages matching your query.[/grey50]")
+    except Exception as e:
+        console.print(f"{ERROR} Search failed: {e}")
+
+def handle_clean():
+    console.print(f"{BRAND} [yellow]Executing exhaustive maintenance sweep...[/yellow]")
+    # Clear apt archives cache
+    subprocess.run(["apt-get", "clean"], check=True)
+    subprocess.run(["apt-get", "autoclean"], check=True)
+    # Clear user local thumbnails and crash files safely
+    subprocess.run("rm -rf ~/.cache/thumbnails/* /var/crash/*", shell=True, stderr=subprocess.DEVNULL)
+    console.print(f"{SUCCESS} Cache logs, temporary crash trees, and system staging pools fully purged.")
+
+def handle_fix():
+    console.print(f"{BRAND} [yellow]Attempting pipeline diagnostic repair sequence...[/yellow]")
+    # Break broken file locks
+    subprocess.run("rm -f /var/lib/dpkg/lock-frontend /var/lib/apt/lists/lock /var/cache/apt/archives/lock", shell=True)
+    subprocess.run(["dpkg", "--configure", "-a"], check=True)
+    subprocess.run(["apt-get", "install", "-f", "-y"], check=True)
+    console.print(f"{SUCCESS} Environment tracking state re-established successfully.")
+
+def handle_list_installed():
+    console.print(f"{BRAND} [yellow]Indexing packages installed on this machine...[/yellow]\n")
+    result = subprocess.run(["apt-mark", "showmanual"], stdout=subprocess.PIPE, text=True)
+    packages = sorted(result.stdout.strip().split('\n'))
+    
+    table = Table(box=None, header_style="bold magenta")
+    table.add_column("Installed Package Name", style="bold cyan")
+    
+    for pkg in packages:  
+        if pkg: table.add_row(pkg)
+    console.print(table)
+
+
+def handle_history():
+    console.print(f"{BRAND} [yellow]Pulling history from dpkg log metrics...[/yellow]\n")
+    if os.path.exists("/var/log/dpkg.log"):
+        result = subprocess.run("grep -E 'installed|upgrade|remove' /var/log/dpkg.log | tail -n 20", shell=True, stdout=subprocess.PIPE, text=True)
+        console.print(result.stdout if result.stdout.strip() else "[grey50]No structural logs tracked inside current metric lifecycle window.[/grey50]")
+    else:
+        console.print(f"{ERROR} History log store inaccessible on this host profile.")
+
+def handle_purge_kernels():
+    console.print(f"{BRAND} [yellow]Analyzing dead kernel instances...[/yellow]")
+    current_kernel = subprocess.run(["uname", "-r"], stdout=subprocess.PIPE, text=True).stdout.strip()
+    # Safely identify old kernel packages without hitting the running one
+    cmd = f"dpkg --list | grep -E 'linux-image-[0-9]' | awk '{{print $2}}' | grep -v '{current_kernel}'"
+    old_kernels = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, text=True).stdout.strip().split('\n')
+    old_kernels = [k for k in old_kernels if k]
+    
+    if not old_kernels:
+        console.print(f"{SUCCESS} Your boot space is clean. Only the running kernel remains: [bold white]{current_kernel}[/bold white]")
+        return
+        
+    for kernel in old_kernels:
+        console.print(f"[red]Purging obsolete kernel line:[/red] {kernel}")
+        subprocess.run(["apt-get", "purge", "-y", kernel], stdout=subprocess.DEVNULL)
+    subprocess.run(["update-grub"], stdout=subprocess.DEVNULL)
+    console.print(f"{SUCCESS} Dead boot assets cleared. GRUB generation table refreshed.")
+
+def handle_stats():
+    console.print(f"{BRAND} [bold white]Local Cache Metrics Profile:[/bold white]\n")
+    apt_cache_size = subprocess.run("du -sh /var/cache/apt/archives | awk '{print $1}'", shell=True, stdout=subprocess.PIPE, text=True).stdout.strip()
+    list_cache_size = subprocess.run("du -sh /var/lib/apt/lists | awk '{print $1}'", shell=True, stdout=subprocess.PIPE, text=True).stdout.strip()
+    
+    console.print(f" * Staged Package Archives Store: [bold cyan]{apt_cache_size}[/bold cyan]")
+    console.print(f" * Sync Database Mirror Indexing:  [bold cyan]{list_cache_size}[/bold cyan]")
+
+def main():
+    if len(sys.argv) < 2:
+        show_detailed_help()
+        sys.exit(0)
+
+    command = sys.argv[1].lower()
+    args = sys.argv[1:]
+
+    # Operations demanding strict administrative context
+    root_commands = ["refresh", "update", "install", "remove", "upgrade", "autoremove", "clean", "sync", "fix", "purge-kernels", "add-ppa", "remove-ppa", "hold", "unhold"]
+
+    if command in root_commands and os.geteuid() != 0:
+        console.print(f"{ERROR} [bold red]Permission Denied:[/bold red] The '[bold white]{command}[/bold white]' operation requires root privileges.")
+        console.print(f"{WARN} Please run this command using [bold cyan]sudo bolt {command}[/bold cyan]")
+        sys.exit(1)
+
+    # Core Router Integration Matrix
+    if command in ["help", "--help", "-h"]:
+        show_detailed_help()
+    elif command in ["refresh", "update"]:
+        rc = run_native_stream(["update", "-y", "-qq"], "[yellow]Refreshing package database mirrors...[/yellow]")
+        if rc == 0: console.print(f"{SUCCESS} Mirrors synchronized successfully!")
+    elif command == "sync":
+        rc = run_native_stream(["update", "-y"], "[yellow]Step 1/2: Synchronizing software index pools...[/yellow]")
+        if rc == 0:
+            run_native_stream(["upgrade", "-y"], "\n[yellow]Step 2/2: Distributing core system package assets...[/yellow]")
+            console.print(f"\n{SUCCESS} Environment sync complete.")
+    elif command == "install" and len(sys.argv) > 2:
+        rc = run_native_stream(args, f"[green]Preparing environment to install [bold white]{sys.argv[2]}[/bold white]...[/green]")
+        if rc == 0: console.print(f"{SUCCESS} [bold white]{sys.argv[2]}[/bold white] is ready for use.")
+    elif command == "remove" and len(sys.argv) > 2:
+        pkg = sys.argv[2]
+        run_native_stream(["purge", "-y", pkg], f"[red]Removing [bold white]{pkg}[/bold white] and configs...[/red]")
+        subprocess.run(["apt-get", "autoremove", "-y", "-qq"])
+        console.print(f"{SUCCESS} System environment cleaned cleanly.")
+    elif command == "search" and len(sys.argv) > 2:
+        handle_search(sys.argv[2])
+    elif command == "upgrade":
+        rc = run_native_stream(["upgrade", "-y"], "[yellow]Applying safe system updates...[/yellow]")
+        if rc == 0: console.print(f"{SUCCESS} System upgraded cleanly.")
+    elif command == "autoremove":
+        rc = run_native_stream(["autoremove", "-y"], "[yellow]Sweeping orphan packages...[/yellow]")
+        if rc == 0: console.print(f"{SUCCESS} Cleanup complete.")
+        
+    # Quality of Life Command Blocks
+    elif command == "clean":
+        handle_clean()
+    elif command == "fix":
+        handle_fix()
+    elif command == "list-installed":
+        handle_list_installed()
+    elif command == "history":
+        handle_history()
+    elif command == "purge-kernels":
+        handle_purge_kernels()
+    elif command == "stats":
+        handle_stats()
+    elif command == "add-ppa" and len(sys.argv) > 2:
+        subprocess.run(["add-apt-repository", sys.argv[2], "-y"])
+    elif command == "remove-ppa" and len(sys.argv) > 2:
+        subprocess.run(["add-apt-repository", "--remove", sys.argv[2], "-y"])
+    elif command == "show-held":
+        result = subprocess.run(["apt-mark", "showhold"], stdout=subprocess.PIPE, text=True)
+        console.print("[bold yellow]Packages locked on hold:[/bold yellow]\n" + (result.stdout if result.stdout.strip() else "None."))
+    elif command == "hold" and len(sys.argv) > 2:
+        subprocess.run(["apt-mark", "hold", sys.argv[2]])
+    elif command == "unhold" and len(sys.argv) > 2:
+        subprocess.run(["apt-mark", "unhold", sys.argv[2]])
+    else:
+        # Transparent fallback proxy for any traditional apt parameters passed directly
+        run_native_stream(args)
+
+if __name__ == "__main__":
+    main()

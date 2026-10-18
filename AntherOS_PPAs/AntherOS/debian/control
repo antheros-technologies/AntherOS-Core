@@ -1,0 +1,14 @@
+Source: antheros
+Section: admin
+Priority: optional
+Maintainer: Anagh Barnwal <contact.anaghbarnwal@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://launchpad.net/~anagh9090/+archive/ubuntu/antheros
+
+Package: antheros
+Architecture: all
+Depends: ${misc:Depends}, curl, jq, unzip, apt
+Description: System update and configuration package for AntherOS
+ Core updater, system scripts, and configurations for maintaining
+ and updating AntherOS systems via PPA.

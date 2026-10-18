@@ -1,0 +1,13 @@
+2026-10-16 16:59:50,842 - dput[1939316]: uploader.invoke_dput - Uploading bolt using ftp to ppa (host: ppa.launchpad.net; directory: ~anagh9090/bolt)
+2026-10-16 16:59:50,847 - dput[1939316]: hook.run_hook - running supported-distribution: check whether the target distribution is currently supported (using distro-info)
+2026-10-16 16:59:50,863 - dput[1939316]: distro_info_checks.check_supported_distribution - {'allowed': ['release'], 'known': ['release', 'proposed', 'updates', 'backports', 'security']}
+2026-10-16 16:59:50,871 - dput[1939316]: hook.run_hook - running required-fields: check whether a field is present and non-empty in the changes file
+2026-10-16 16:59:50,899 - dput[1939316]: hook.run_hook - running checksum: verify checksums before uploading
+2026-10-16 16:59:50,934 - dput[1939316]: hook.run_hook - running suite-mismatch: check the target distribution for common errors
+2026-10-16 16:59:50,965 - dput[1939316]: hook.run_hook - running check-debs: makes sure the upload contains a binary package
+2026-10-16 16:59:51,017 - dput[1939316]: hook.run_hook - running gpg: check GnuPG signatures before the upload
+2026-10-16 16:59:52,534 - dput[1939316]: uploader.invoke_dput - Uploading bolt_1.2.dsc
+2026-10-16 16:59:53,630 - dput[1939316]: uploader.invoke_dput - Uploading bolt_1.2.orig.tar.xz
+2026-10-16 16:59:54,706 - dput[1939316]: uploader.invoke_dput - Uploading bolt_1.2.debian.tar.xz
+2026-10-16 16:59:55,736 - dput[1939316]: uploader.invoke_dput - Uploading bolt_1.2_source.buildinfo
+2026-10-16 16:59:57,052 - dput[1939316]: uploader.invoke_dput - Uploading bolt_1.2_source.changes

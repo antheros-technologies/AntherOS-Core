@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+echo "==> Fetching latest wallpapers for AntherOS..."
+
+REPO="antheros-technologies/AntherOS-Core"
+TMP_ZIP="/tmp/wallpaper.zip"
+
+rm -f "$TMP_ZIP"
+
+DOWNLOAD_URL=$(curl -s "https://api.github.com/repos/${REPO}/releases/latest" | \
+                       jq -r '.assets[] | select(.name | endswith(".zip")) | .browser_download_url')
+
+    if [ -n "$DOWNLOAD_URL" ] && [ "$DOWNLOAD_URL" != "null" ]; then
+        echo "Downloading wallpaper package from: $DOWNLOAD_URL"
+        curl -sSL -o "$TMP_ZIP" "$DOWNLOAD_URL"
+    else
+        echo "Error: Could not find a .zip asset in the latest GitHub release." >&2
+    exit 1
+    fi
+
+    mkdir -p /usr/share/backgrounds/cosmic
+    rm -rf /usr/share/backgrounds/cosmic/*
+    unzip -q "$TMP_ZIP" -d /usr/share/backgrounds/cosmic/
+    rm -f "$TMP_ZIP"
+    echo "==> Wallpaper update complete."
+
+exit 0

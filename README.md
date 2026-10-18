@@ -3,7 +3,7 @@
 # AntherOS
 
 <p align="center">
-  <b>A Refined, Open-Source Desktop Operating System Built on Pop!\_OS and COSMIC</b>
+  <b>A Refined, Open-Source Desktop Operating System Built on Pop!_OS and COSMIC</b>
 </p>
 
 <p align="center">
@@ -62,7 +62,7 @@ Before deploying the transformation script, ensure your build environment satisf
   <tbody>
     <tr>
       <td><b>Operating System</b></td>
-      <td>Pop!\_OS 22.04 LTS or newer (COSMIC Desktop Environment)</td>
+      <td>Pop!_OS 22.04 LTS or newer (COSMIC Desktop Environment)</td>
     </tr>
     <tr>
       <td><b>Privileges</b></td>
@@ -135,7 +135,7 @@ The <code>build.sh</code> script executes a six-stage automated pipeline to conv
 
 <ul>
   <li><b>AntherOS Source Scripts & Configuration:</b> Released under the <a href="LICENSE">GPL-3.0 License</a>.</li>
-  <li><b>Base Operating System:</b> <a href="https://github.com/pop-os">Pop!\_OS</a>, developed by System76.</li>
+  <li><b>Base Operating System:</b> <a href="https://github.com/pop-os">Pop!_OS</a>, developed by System76.</li>
   <li><b>Desktop Environment:</b> <a href="https://github.com/pop-os/cosmic-epoch">COSMIC Desktop Environment</a>.</li>
 </ul>
 

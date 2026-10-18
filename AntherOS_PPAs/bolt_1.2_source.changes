@@ -1,0 +1,50 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Fri, 16 Oct 2026 17:00:00 +0530
+Source: bolt
+Built-For-Profiles: noudeb
+Architecture: source
+Version: 1.2
+Distribution: noble
+Urgency: medium
+Maintainer: Anagh Barnwal <contact.anaghbarnwal@gmail.com>
+Changed-By: Anagh Barnwal <contact.anaghbarnwal@gmail.com>
+Changes:
+ bolt (1.2) noble; urgency=medium
+ .
+   * Fixed every bug, add many new features, made the overall look better.
+Checksums-Sha1:
+ c812acebebb8138cba4ae700ff850467da3ef51e 1660 bolt_1.2.dsc
+ 658ce79132d67cfce1655ee8d4ebb331602b3612 3932 bolt_1.2.orig.tar.xz
+ 922e2a447e6a3451ce071e73a0be84d892958e32 788 bolt_1.2.debian.tar.xz
+ 969c9664231cb75640fb81f7692366016c97fc40 20908 bolt_1.2_source.buildinfo
+Checksums-Sha256:
+ d07ab7c512add70ed0710dce1aaa9af72173e022e9b56cc9a10e9de917157bc9 1660 bolt_1.2.dsc
+ c72631b15b525a7589416429694dc3a8b107ac808a295e1033a15e09b1fe142f 3932 bolt_1.2.orig.tar.xz
+ 6fd9cd82d78acd8c9dc6c7aa49c1f58150e983e0f48b4e39b19b603748099101 788 bolt_1.2.debian.tar.xz
+ 97e552e6247d55a528318d2a434da6d598e725f51bd654ccafbb86952fb0c1ba 20908 bolt_1.2_source.buildinfo
+Files:
+ 847988529283afb98835a7312a65744c 1660 utils optional bolt_1.2.dsc
+ 20ad6f9d61d143db6ec86e5c40f19aab 3932 utils optional bolt_1.2.orig.tar.xz
+ 4e916bbbeed507d1428a252b9901962f 788 utils optional bolt_1.2.debian.tar.xz
+ acbb0e44dd618dff6fd59003fe27ddd2 20908 utils optional bolt_1.2_source.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQJTBAEBCgA9FiEEPL55AqWwjtsacF5p1mCyC6VYIokFAmrSCq0fHGNvbnRhY3Qu
+YW5hZ2hiYXJud2FsQGdtYWlsLmNvbQAKCRDWYLILpVgiiWGfD/9tDi5Jz48jGa4w
+xxBStUbgF+Mmz3OrbgGswd0BDA6uvlFG/ViHSKId1p2WjoVo2YwxmirSV9/f6cx8
+DkaOWBNqIzKg9pxCydmq95dmuOh+Jn8sMXrykRbqnScW5aoI2833WGWYTr1oK8U5
+faD3pYabn9Hq4yQkmW7UbUH1LENciytD9uWLPE9SrMrt63KAJTUljIpidMW70OPA
+vPCym/lqkoojsl+1SV1/Qw5j08hkC0Rs9QcXPe7idSWJFxH8gpb/qSzB8s0kmISI
+UvAuyvNSuMftPNWVDvZYZTFqOyq+kescWWpWElZqNXrIORvMKWAwwIGu1K+naJJN
+D/s95b0RvZQbptC8VBnkuuEoQyaj4q5X73iYjtWzJ397ST5AWf8/VP38EeLyROl2
+SoqYMf/z5XMDnnvasBF6KsWMCuSdnp1J+r/0s47gA1BfpfqlEULxoOoXIoZkLmOL
+M4Dn312jAGDTm8gWXpjVfepksXttVVs42EyAJ0o699ejXEbmuSk0B+7nmD4XCK0U
+GzIk32l6RaSBSqMbmhBEzk/k9wOmu+8WAHGPV2KFKT07XmeqKYLe6V1+0fyz4IcN
+P4EBjGuBQkZ/+viuItbwklTlI2quNarAQLi254nqOaHL5aSJROrPOQoSLr3Qo95K
+U/f3ob2DvOnXVuNcdkpUYdsGn34KKQ==
+=9dGD
+-----END PGP SIGNATURE-----
