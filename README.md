@@ -1,8 +1,5 @@
 <div align="center">
 <img src="logo.png" alt="AntherOS Logo" height="200">
-<br>
-<h1>AntherOS</h1>
-
 <p align="center">
   <b>A Refined, Open-Source Desktop Operating System Built on Pop!_OS and COSMIC</b>
 </p>
