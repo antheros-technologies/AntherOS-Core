@@ -1,5 +1,6 @@
 <div align="center">
 <img src="logo.png" alt="AntherOS Logo" height="200">
+<br>
 # AntherOS
 
 <p align="center">
